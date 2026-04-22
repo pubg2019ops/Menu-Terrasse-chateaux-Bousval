@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Menu — Vignoble du Château de Bousval</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0E0D0A;
+    --earth: #1C1A14;
+    --bark: #2E2619;
+    --gold: #C9A84C;
+    --gold-light: #E2C47A;
+    --gold-pale: #F5E9C8;
+    --cream: #F7F2E8;
+    --muted: #9A8F78;
+    --border: rgba(201,168,76,0.2);
+    --border-strong: rgba(201,168,76,0.45);
+    --rouge: #8B3030;
+    --blanc: #C8A84B;
+    --nature: #4A6741;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--night);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── LANG SWITCHER ── */
+  .lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(14,13,10,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+  }
+  .lang-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    opacity: 0.9;
+  }
+  .lang-btns { display: flex; gap: 6px; }
+  .lang-btn {
+    padding: 5px 14px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 1px;
+  }
+  .lang-btn.active, .lang-btn:hover {
+    background: var(--gold);
+    color: var(--night);
+    border-color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 120px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .hero-divider span {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light));
+  }
+  .hero-divider span:last-child {
+    background: linear-gradient(90deg, var(--gold-light), transparent);
+  }
+  .hero-divider .diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-pills {
+    position: sticky;
+    top: 49px;
+    z-index: 90;
+    background: rgba(14,13,10,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-pills::-webkit-scrollbar { display: none; }
+  .nav-pill {
+    padding: 16px 18px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-weight: 500;
+    flex-shrink: 0;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 60px 0 40px;
+    max-width: 680px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+  .section-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .section-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .section-line::before, .section-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-strong);
+  }
+  .section-line .dot {
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── PLANCHE CARDS ── */
+  .planche {
+    border: 1px solid var(--border);
+    background: var(--earth);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .planche:hover { border-color: var(--border-strong); }
+  .planche::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 100%;
+    background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .planche:hover::before { opacity: 1; }
+
+  .planche-head {
+    padding: 22px 24px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+  .planche-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .planche-tagline {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .planche-for {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border-strong);
+    padding: 3px 10px;
+    margin-top: 2px;
+  }
+  .planche-price {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+  .planche-price .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .planche-price .label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .planche-body { padding: 18px 24px 20px; }
+
+  .produit-col-title {
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 10px;
+    margin-top: 4px;
+  }
+  .produit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin-bottom: 14px; }
+  @media (max-width: 400px) { .produit-grid { grid-template-columns: 1fr; } }
+
+  .produit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(201,168,76,0.1);
+    font-size: 12px;
+  }
+  .produit-item:last-child { border-bottom: none; }
+  .produit-nom { color: var(--cream); opacity: 0.85; }
+  .produit-gr {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .planche-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .planche-total strong { color: var(--gold-light); font-weight: 500; }
+
+  .accord-strip {
+    background: var(--bark);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .accord-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .accord-dot.blanc { background: var(--blanc); }
+  .accord-dot.rouge { background: var(--rouge); }
+  .accord-dot.nature { background: var(--nature); }
+  .accord-dot.assemblage { background: var(--muted); }
+  .accord-text { font-size: 11px; color: var(--muted); }
+  .accord-text strong { color: var(--cream); font-weight: 500; }
+
+  /* ── VINS ── */
+  .vin-category {
+    margin-bottom: 32px;
+  }
+  .vin-cat-title {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .vin-cat-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .vin-item {
+    background: var(--earth);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color 0.25s;
+  }
+  .vin-item:hover { border-color: var(--border-strong); }
+  .vin-info { flex: 1; }
+  .vin-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 3px;
+  }
+  .vin-millesime {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .vin-note {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .vin-badge {
+    display: inline-block;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 1px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .badge-blanc { background: rgba(200,168,75,0.15); color: var(--blanc); border: 1px solid rgba(200,168,75,0.3); }
+  .badge-rouge { background: rgba(139,48,48,0.2); color: #D4706F; border: 1px solid rgba(139,48,48,0.4); }
+  .badge-nature { background: rgba(74,103,65,0.2); color: #82B076; border: 1px solid rgba(74,103,65,0.4); }
+  .badge-assemblage { background: rgba(154,143,120,0.15); color: var(--muted); border: 1px solid var(--border); }
+
+  .vin-prices {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .vin-price-row {
+    margin-bottom: 4px;
+  }
+  .vin-price-row .lbl {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 1px;
+  }
+  .vin-price-row .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .vin-price-row .val.small {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ── SPIRITUEUX ── */
+  .spirit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 400px) { .spirit-grid { grid-template-columns: 1fr; } }
+
+  .spirit-item {
+    background: var(--earth);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    text-align: center;
+    transition: border-color 0.25s;
+  }
+  .spirit-item:hover { border-color: var(--border-strong); }
+  .spirit-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .spirit-detail {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .spirit-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+  }
+  .spirit-volume {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .menu-footer {
+    text-align: center;
+    padding: 40px 24px 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .footer-note {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 340px;
+    margin: 0 auto 16px;
+  }
+  .footer-cert {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+  }
+  .footer-cert::before {
+    content: '✦';
+    font-size: 8px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .planche, .vin-item, .spirit-item {
+    animation: fadeUp 0.5s ease both;
+  }
+  .planche:nth-child(1) { animation-delay: 0.05s; }
+  .planche:nth-child(2) { animation-delay: 0.1s; }
+  .planche:nth-child(3) { animation-delay: 0.15s; }
+  .planche:nth-child(4) { animation-delay: 0.2s; }
+
+  /* ── SEPARATOR ── */
+  .sep {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    margin: 0 24px;
+  }
+
+  /* ── LANG HIDE ── */
+  [data-lang="en"] { display: none; }
+  body.en [data-lang="fr"] { display: none; }
+  body.en [data-lang="en"] { display: block; }
+  body.en .vin-item [data-lang="en"],
+  body.en .planche [data-lang="en"],
+  body.en .spirit-item [data-lang="en"] { display: block; }
+  .inline-en { display: none; }
+  .inline-fr { display: inline; }
+  body.en .inline-en { display: inline; }
+  body.en .inline-fr { display: none; }
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <div class="lang-logo">Château de Bousval</div>
+  <div class="lang-btns">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Vignoble du Château de Bousval · Bousval, Brabant Wallon</div>
+  <h1 class="hero-title">
+    <span data-lang="fr">La Terrasse<br><em>des Vignes</em></span>
+    <span data-lang="en">The Vineyard<br><em>Terrace</em></span>
+  </h1>
+  <p class="hero-sub">
+    <span class="inline-fr">Planches · Vins du domaine · Spiritueux</span>
+    <span class="inline-en">Boards · Estate wines · Spirits</span>
+  </p>
+  <div class="hero-divider">
+    <span></span>
+    <div class="diamond"></div>
+    <span></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-pills">
+  <a class="nav-pill" href="#planches">
+    <span class="inline-fr">Planches</span>
+    <span class="inline-en">Boards</span>
+  </a>
+  <a class="nav-pill" href="#vins">
+    <span class="inline-fr">Vins</span>
+    <span class="inline-en">Wines</span>
+  </a>
+  <a class="nav-pill" href="#spiritueux">
+    <span class="inline-fr">Spiritueux</span>
+    <span class="inline-en">Spirits</span>
+  </a>
+</nav>
+
+<!-- ═══════════════════ SECTION PLANCHES ═══════════════════ -->
+<section id="planches" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="inline-fr">Dégustation · Terroir belge</span>
+      <span class="inline-en">Tasting · Belgian terroir</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="fr">Nos <em>Planches</em></span>
+      <span data-lang="en">Our <em>Boards</em></span>
+    </h2>
+    <p class="section-desc" data-lang="fr">
+      Chaque planche est composée pour accompagner un vin du domaine. Charcuteries artisanales des Salaisons du Lothier, fromages de La Fruitière Brussels et de la Ferme de la Baillerie.
+    </p>
+    <p class="section-desc" data-lang="en">
+      Each board is crafted to complement an estate wine. Artisan charcuterie from Salaisons du Lothier, cheeses from La Fruitière Brussels and Ferme de la Baillerie.
+    </p>
+    <div class="section-line"><div class="dot"></div></div>
+  </div>
+
+  <!-- Planche 1 : La Fraîcheur -->
+  <div class="planche">
+    <div class="planche-head">
+      <div>
+        <div class="planche-name">La Fraîcheur <span style="font-size:13px;font-style:italic;font-family:'Playfair Display',serif;color:var(--muted)">/ The Freshness</span></div>
+        <div class="planche-tagline">
+          <span class="inline-fr">Légèreté et finesse · vif et fruité</span>
+          <span class="inline-en">Light and delicate · fresh and fruity</span>
+        </div>
+        <div class="planche-for">
+          <span class="inline-fr">Recommandé pour 2 personnes</span>
+          <span class="inline-en">Recommended for 2 people</span>
+        </div>
+      </div>
+      <div class="planche-price">
+        <div class="amount">28€</div>
+        <span class="label">
+          <span class="inline-fr">planche seule</span>
+          <span class="inline-en">board only</span>
+        </span>
+      </div>
+    </div>
+    <div class="planche-body">
+      <div class="produit-col-title">
+        <span class="inline-fr">Charcuteries</span>
+        <span class="inline-en">Charcuterie</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">Jambon à l'os <span class="inline-en">/ Bone-in ham</span></span><span class="produit-gr">30g</span></div>
+        <div class="produit-item"><span class="produit-nom">Coppa maison <span class="inline-en">/ House coppa</span></span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">Filet de Saxe <span class="inline-en">/ Saxon filet</span></span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Saucisses sèches (×2)</span>
+          <span class="inline-en">Dry sausages (×2)</span>
+        </span><span class="produit-gr">20g</span></div>
+      </div>
+      <div class="produit-col-title" style="margin-top:10px">
+        <span class="inline-fr">Fromages</span>
+        <span class="inline-en">Cheeses</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Crottin frais</span>
+          <span class="inline-en">Fresh goat cheese</span>
+        </span><span class="produit-gr">45g</span></div>
+        <div class="produit-item"><span class="produit-nom">Feta <span class="inline-en">/ Feta</span></span><span class="produit-gr">40g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Tomme jeune</span>
+          <span class="inline-en">Young tomme</span>
+        </span><span class="produit-gr">25g</span></div>
+      </div>
+      <div class="planche-total">
+        <span>
+          <span class="inline-fr">Total produits</span>
+          <span class="inline-en">Total produce</span>
+        </span>
+        <strong>210g</strong>
+      </div>
+    </div>
+    <div class="accord-strip">
+      <div class="accord-dot blanc"></div>
+      <div class="accord-text">
+        <span class="inline-fr"><strong>Accord conseillé :</strong> Gouttes d'O 2022 — Chardonnay · 25€/btl · 9€/verre</span>
+        <span class="inline-en"><strong>Suggested pairing:</strong> Gouttes d'O 2022 — Chardonnay · €25/btl · €9/glass</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Planche 2 : Le Caractère -->
+  <div class="planche">
+    <div class="planche-head">
+      <div>
+        <div class="planche-name">Le Caractère <span style="font-size:13px;font-style:italic;font-family:'Playfair Display',serif;color:var(--muted)"">/ The Character</span></div>
+        <div class="planche-tagline">
+          <span class="inline-fr">Puissant et fumé · une personnalité marquée</span>
+          <span class="inline-en">Bold and smoky · a strong personality</span>
+        </div>
+        <div class="planche-for">
+          <span class="inline-fr">Recommandé pour 2 personnes</span>
+          <span class="inline-en">Recommended for 2 people</span>
+        </div>
+      </div>
+      <div class="planche-price">
+        <div class="amount">38€</div>
+        <span class="label">
+          <span class="inline-fr">planche seule</span>
+          <span class="inline-en">board only</span>
+        </span>
+      </div>
+    </div>
+    <div class="planche-body">
+      <div class="produit-col-title">
+        <span class="inline-fr">Charcuteries</span>
+        <span class="inline-en">Charcuterie</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Saucisson gaumais</span>
+          <span class="inline-en">Gaumais sausage</span>
+        </span><span class="produit-gr">30g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Filet d'Anvers</span>
+          <span class="inline-en">Antwerp filet</span>
+        </span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Magret canard fumé</span>
+          <span class="inline-en">Smoked duck breast</span>
+        </span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">Pancetta</span><span class="produit-gr">20g</span></div>
+      </div>
+      <div class="produit-col-title" style="margin-top:10px">
+        <span class="inline-fr">Fromages</span>
+        <span class="inline-en">Cheeses</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Cendré (chèvre affiné)</span>
+          <span class="inline-en">Ash-ripened goat</span>
+        </span><span class="produit-gr">45g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Croûte lavée</span>
+          <span class="inline-en">Washed rind</span>
+        </span><span class="produit-gr">45g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Crottin demi-sec</span>
+          <span class="inline-en">Semi-dry goat</span>
+        </span><span class="produit-gr">40g</span></div>
+      </div>
+      <div class="planche-total">
+        <span>
+          <span class="inline-fr">Total produits</span>
+          <span class="inline-en">Total produce</span>
+        </span>
+        <strong>230g</strong>
+      </div>
+    </div>
+    <div class="accord-strip">
+      <div class="accord-dot assemblage"></div>
+      <div class="accord-text">
+        <span class="inline-fr"><strong>Accord conseillé :</strong> Le Névrosé 2023 — Assemblage · 28€/btl · 11€/verre</span>
+        <span class="inline-en"><strong>Suggested pairing:</strong> Le Névrosé 2023 — Blend · €28/btl · €11/glass</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Planche 3 : Le Vivant -->
+  <div class="planche">
+    <div class="planche-head">
+      <div>
+        <div class="planche-name">Le Vivant <span style="font-size:13px;font-style:italic;font-family:'Playfair Display',serif;color:var(--muted)"">/ The Living</span></div>
+        <div class="planche-tagline">
+          <span class="inline-fr">Nature et sauvage · produits bruts sans artifice</span>
+          <span class="inline-en">Wild and natural · raw, unfiltered produce</span>
+        </div>
+        <div class="planche-for">
+          <span class="inline-fr">Recommandé pour 2 personnes</span>
+          <span class="inline-en">Recommended for 2 people</span>
+        </div>
+      </div>
+      <div class="planche-price">
+        <div class="amount">42€</div>
+        <span class="label">
+          <span class="inline-fr">planche seule</span>
+          <span class="inline-en">board only</span>
+        </span>
+      </div>
+    </div>
+    <div class="planche-body">
+      <div class="produit-col-title">
+        <span class="inline-fr">Charcuteries</span>
+        <span class="inline-en">Charcuterie</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">Bresaola</span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Jambon sec</span>
+          <span class="inline-en">Dry-cured ham</span>
+        </span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Saucisse marcassin (×2)</span>
+          <span class="inline-en">Wild boar sausage (×2)</span>
+        </span><span class="produit-gr">30g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Rillette porc</span>
+          <span class="inline-en">Pork rillette</span>
+        </span><span class="produit-gr">25g</span></div>
+      </div>
+      <div class="produit-col-title" style="margin-top:10px">
+        <span class="inline-fr">Fromages</span>
+        <span class="inline-en">Cheeses</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Tomme affinée 3 mois</span>
+          <span class="inline-en">3-month aged tomme</span>
+        </span><span class="produit-gr">50g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Crottin nature sec</span>
+          <span class="inline-en">Dry aged goat</span>
+        </span><span class="produit-gr">45g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Crottin ail des ours</span>
+          <span class="inline-en">Wild garlic goat</span>
+        </span><span class="produit-gr">40g</span></div>
+      </div>
+      <div class="planche-total">
+        <span>
+          <span class="inline-fr">Total produits</span>
+          <span class="inline-en">Total produce</span>
+        </span>
+        <strong>240g</strong>
+      </div>
+    </div>
+    <div class="accord-strip">
+      <div class="accord-dot nature"></div>
+      <div class="accord-text">
+        <span class="inline-fr"><strong>Accord conseillé :</strong> Le Naturiste 2023 — Chardonnay nature · 32€/btl · 11€/verre</span>
+        <span class="inline-en"><strong>Suggested pairing:</strong> Le Naturiste 2023 — Natural Chardonnay · €32/btl · €11/glass</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Planche 4 : L'Exception -->
+  <div class="planche">
+    <div class="planche-head">
+      <div>
+        <div class="planche-name">L'Exception <span style="font-size:13px;font-style:italic;font-family:'Playfair Display',serif;color:var(--muted)"">/ The Exception</span></div>
+        <div class="planche-tagline">
+          <span class="inline-fr">La planche signature · pour les grandes occasions</span>
+          <span class="inline-en">The signature board · for special occasions</span>
+        </div>
+        <div class="planche-for">
+          <span class="inline-fr">Recommandé pour 2 personnes</span>
+          <span class="inline-en">Recommended for 2 people</span>
+        </div>
+      </div>
+      <div class="planche-price">
+        <div class="amount">52€</div>
+        <span class="label">
+          <span class="inline-fr">planche seule</span>
+          <span class="inline-en">board only</span>
+        </span>
+      </div>
+    </div>
+    <div class="planche-body">
+      <div class="produit-col-title">
+        <span class="inline-fr">Charcuteries</span>
+        <span class="inline-en">Charcuterie</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Ibérico Bellota 5 ans</span>
+          <span class="inline-en">5-year Ibérico Bellota</span>
+        </span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Parme 18 mois</span>
+          <span class="inline-en">18-month Parma</span>
+        </span><span class="produit-gr">35g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Magret canard fumé</span>
+          <span class="inline-en">Smoked duck breast</span>
+        </span><span class="produit-gr">25g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Filet d'Anvers</span>
+          <span class="inline-en">Antwerp filet</span>
+        </span><span class="produit-gr">25g</span></div>
+      </div>
+      <div class="produit-col-title" style="margin-top:10px">
+        <span class="inline-fr">Fromages</span>
+        <span class="inline-en">Cheeses</span>
+      </div>
+      <div class="produit-grid">
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Tomme affinée</span>
+          <span class="inline-en">Aged tomme</span>
+        </span><span class="produit-gr">50g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Cendré de chèvre</span>
+          <span class="inline-en">Ash-ripened goat</span>
+        </span><span class="produit-gr">45g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Crottin sec</span>
+          <span class="inline-en">Dry goat cheese</span>
+        </span><span class="produit-gr">35g</span></div>
+        <div class="produit-item"><span class="produit-nom">
+          <span class="inline-fr">Croûte lavée</span>
+          <span class="inline-en">Washed rind</span>
+        </span><span class="produit-gr">30g</span></div>
+      </div>
+      <div class="planche-total">
+        <span>
+          <span class="inline-fr">Total produits</span>
+          <span class="inline-en">Total produce</span>
+        </span>
+        <strong>270g</strong>
+      </div>
+    </div>
+    <div class="accord-strip">
+      <div class="accord-dot rouge"></div>
+      <div class="accord-text">
+        <span class="inline-fr"><strong>Accord conseillé :</strong> Ange ou Démon 2022 — Pinot Noir · 45€/btl · 16€/verre</span>
+        <span class="inline-en"><strong>Suggested pairing:</strong> Ange ou Démon 2022 — Pinot Noir · €45/btl · €16/glass</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════ SECTION VINS ═══════════════════ -->
+<section id="vins" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="inline-fr">Vins du domaine · Bio & Biodynamie</span>
+      <span class="inline-en">Estate wines · Organic & Biodynamic</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="fr">Nos <em>Vins</em></span>
+      <span data-lang="en">Our <em>Wines</em></span>
+    </h2>
+    <p class="section-desc" data-lang="fr">
+      Certifiés biologiques depuis 2021 et biodynamiques (Biodyvin) depuis 2024. Chardonnay, Pinot Gris, Pinot Noir — 8,20 ha d'un seul tenant.
+    </p>
+    <p class="section-desc" data-lang="en">
+      Certified organic since 2021 and biodynamic (Biodyvin) since 2024. Chardonnay, Pinot Gris, Pinot Noir — 8.20 ha in one block.
+    </p>
+    <div class="section-line"><div class="dot"></div></div>
+  </div>
+
+  <!-- Blancs -->
+  <div class="vin-category">
+    <div class="vin-cat-title">
+      <span class="inline-fr">Vins blancs</span>
+      <span class="inline-en">White wines</span>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-blanc">Chardonnay</div>
+        <div class="vin-name">Gouttes d'O</div>
+        <div class="vin-millesime">2022</div>
+        <div class="vin-note">
+          <span class="inline-fr">Fruité, vif, minéral. Notre entrée en matière — fraîcheur et éclat.</span>
+          <span class="inline-en">Fruity, crisp, mineral. Our opening act — freshness and brightness.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">25€</span>
+        </div>
+        <div class="vin-price-row" style="margin-top:8px">
+          <span class="lbl">
+            <span class="inline-fr">Au verre</span>
+            <span class="inline-en">By glass</span>
+          </span>
+          <span class="val small">9€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-blanc">Chardonnay</div>
+        <div class="vin-name">Tout Cru</div>
+        <div class="vin-millesime">2022</div>
+        <div class="vin-note">
+          <span class="inline-fr">Chardonnay de caractère, fermenté en cuve. Rond et profond.</span>
+          <span class="inline-en">Character Chardonnay, tank-fermented. Round and deep.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">36€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-nature">
+          <span class="inline-fr">Chardonnay · Nature</span>
+          <span class="inline-en">Chardonnay · Natural</span>
+        </div>
+        <div class="vin-name">Le Naturiste</div>
+        <div class="vin-millesime">2023</div>
+        <div class="vin-note">
+          <span class="inline-fr">Vin nature vivant, légèrement oxydatif. Sauvage et sincère.</span>
+          <span class="inline-en">Living natural wine, lightly oxidative. Wild and honest.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">32€</span>
+        </div>
+        <div class="vin-price-row" style="margin-top:8px">
+          <span class="lbl">
+            <span class="inline-fr">Au verre</span>
+            <span class="inline-en">By glass</span>
+          </span>
+          <span class="val small">11€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-blanc">Pinot Gris</div>
+        <div class="vin-name">Le Petit Gris</div>
+        <div class="vin-millesime">2023</div>
+        <div class="vin-note">
+          <span class="inline-fr">Aromatique et élégant. Notes de pêche blanche et de fleurs.</span>
+          <span class="inline-en">Aromatic and elegant. Notes of white peach and flowers.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">30€</span>
+        </div>
+        <div class="vin-price-row" style="margin-top:8px">
+          <span class="lbl">
+            <span class="inline-fr">Au verre</span>
+            <span class="inline-en">By glass</span>
+          </span>
+          <span class="val small">11€</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Assemblage -->
+  <div class="vin-category">
+    <div class="vin-cat-title">
+      <span class="inline-fr">Assemblage</span>
+      <span class="inline-en">Blend</span>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-assemblage">
+          <span class="inline-fr">Chardonnay · Pinot Gris · Pinot Noir</span>
+          <span class="inline-en">Chardonnay · Pinot Gris · Pinot Noir</span>
+        </div>
+        <div class="vin-name">Le Névrosé</div>
+        <div class="vin-millesime">2023</div>
+        <div class="vin-note">
+          <span class="inline-fr">Assemblage audacieux des trois cépages du domaine. Complexe, rond, avec une belle longueur.</span>
+          <span class="inline-en">Bold blend of all three estate varieties. Complex, round, with a beautiful finish.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">28€</span>
+        </div>
+        <div class="vin-price-row" style="margin-top:8px">
+          <span class="lbl">
+            <span class="inline-fr">Au verre</span>
+            <span class="inline-en">By glass</span>
+          </span>
+          <span class="val small">11€</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Rouge -->
+  <div class="vin-category">
+    <div class="vin-cat-title">
+      <span class="inline-fr">Vin rouge</span>
+      <span class="inline-en">Red wine</span>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-rouge">Pinot Noir</div>
+        <div class="vin-name">Ange ou Démon</div>
+        <div class="vin-millesime">2022</div>
+        <div class="vin-note">
+          <span class="inline-fr">Élégant, fruits rouges, tannins fins. Le seul rouge du domaine — rare et précieux.</span>
+          <span class="inline-en">Elegant, red fruits, silky tannins. The estate's only red — rare and precious.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">45€</span>
+        </div>
+        <div class="vin-price-row" style="margin-top:8px">
+          <span class="lbl">
+            <span class="inline-fr">Au verre</span>
+            <span class="inline-en">By glass</span>
+          </span>
+          <span class="val small">16€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-rouge">Pinot Noir</div>
+        <div class="vin-name">Ange ou Démon</div>
+        <div class="vin-millesime">2020 · <span style="color:var(--gold);font-size:9px">
+          <span class="inline-fr">Millésime d'exception</span>
+          <span class="inline-en">Exceptional vintage</span>
+        </span></div>
+        <div class="vin-note">
+          <span class="inline-fr">Le grand millésime. Profondeur et complexité remarquables. Quantités limitées.</span>
+          <span class="inline-en">The great vintage. Remarkable depth and complexity. Limited quantities.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">
+            <span class="inline-fr">Bouteille</span>
+            <span class="inline-en">Bottle</span>
+          </span>
+          <span class="val">55€</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Demi-bouteille -->
+  <div class="vin-category">
+    <div class="vin-cat-title">
+      <span class="inline-fr">Demi-bouteille · 37,5cl</span>
+      <span class="inline-en">Half bottle · 37.5cl</span>
+    </div>
+
+    <div class="vin-item">
+      <div class="vin-info">
+        <div class="vin-badge badge-blanc">Chardonnay</div>
+        <div class="vin-name">Enfant Sauvage de Bousval</div>
+        <div class="vin-millesime">37,5 cl</div>
+        <div class="vin-note">
+          <span class="inline-fr">Format idéal pour une dégustation solo ou pour explorer deux cuvées.</span>
+          <span class="inline-en">Perfect format for a solo tasting or to explore two cuvées.</span>
+        </div>
+      </div>
+      <div class="vin-prices">
+        <div class="vin-price-row">
+          <span class="lbl">37,5 cl</span>
+          <span class="val">28€</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════ SECTION SPIRITUEUX ═══════════════════ -->
+<section id="spiritueux" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <span class="inline-fr">Eau-de-vie · Marc · Spiritueux du domaine</span>
+      <span class="inline-en">Eau-de-vie · Marc · Estate spirits</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="fr">Nos <em>Spiritueux</em></span>
+      <span data-lang="en">Our <em>Spirits</em></span>
+    </h2>
+    <p class="section-desc" data-lang="fr">
+      Distillés à partir des marcs de nos raisins. Servis en dégustation à 4cl. Disponibles à l'emporter en 37,5cl et 175cl.
+    </p>
+    <p class="section-desc" data-lang="en">
+      Distilled from our own grape pomace. Served as a tasting at 4cl. Available to take away in 37.5cl and 175cl bottles.
+    </p>
+    <div class="section-line"><div class="dot"></div></div>
+  </div>
+
+  <div class="spirit-grid">
+
+    <div class="spirit-item">
+      <div class="spirit-name">
+        <span class="inline-fr">Marc de Chardonnay</span>
+        <span class="inline-en">Chardonnay Marc</span>
+      </div>
+      <div class="spirit-detail">
+        <span class="inline-fr">Marc de Bousval · Chardonnay<br>Distillé sur lie · Arômes floraux et fruités</span>
+        <span class="inline-en">Marc de Bousval · Chardonnay<br>Lees-distilled · Floral and fruity aromas</span>
+      </div>
+      <div class="spirit-price">12€</div>
+      <div class="spirit-volume">4cl · 34€/37,5cl · 165€/175cl</div>
+    </div>
+
+    <div class="spirit-item">
+      <div class="spirit-name">
+        <span class="inline-fr">Marc de Pinot Gris</span>
+        <span class="inline-en">Pinot Gris Marc</span>
+      </div>
+      <div class="spirit-detail">
+        <span class="inline-fr">Marc de Bousval · Pinot Gris<br>Notes épicées et poivrées</span>
+        <span class="inline-en">Marc de Bousval · Pinot Gris<br>Spiced and peppery notes</span>
+      </div>
+      <div class="spirit-price">12€</div>
+      <div class="spirit-volume">4cl · 34€/37,5cl</div>
+    </div>
+
+    <div class="spirit-item">
+      <div class="spirit-name">
+        <span class="inline-fr">Marc de Pinot Noir</span>
+        <span class="inline-en">Pinot Noir Marc</span>
+      </div>
+      <div class="spirit-detail">
+        <span class="inline-fr">Marc de Bousval · Pinot Noir<br>Fruits rouges et tannins fondus</span>
+        <span class="inline-en">Marc de Bousval · Pinot Noir<br>Red fruit and smooth tannins</span>
+      </div>
+      <div class="spirit-price">12€</div>
+      <div class="spirit-volume">4cl · 34€/37,5cl</div>
+    </div>
+
+    <div class="spirit-item">
+      <div class="spirit-name">
+        <span class="inline-fr">Eau-de-vie de Poire</span>
+        <span class="inline-en">Pear Eau-de-vie</span>
+      </div>
+      <div class="spirit-detail">
+        <span class="inline-fr">Distillat de poire · Frais et délicat<br>Arômes de poire Williams</span>
+        <span class="inline-en">Pear distillate · Fresh and delicate<br>Williams pear aromas</span>
+      </div>
+      <div class="spirit-price">12€</div>
+      <div class="spirit-volume">4cl · 34€/37,5cl</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="sep"></div>
+<footer class="menu-footer">
+  <div class="footer-logo">Vignoble du Château de Bousval</div>
+  <p class="footer-note" data-lang="fr">
+    Rue du Grand Arbre 23 · 1470 Bousval · Belgique<br>
+    Tous nos vins sont issus de l'agriculture biologique et biodynamique.<br>
+    Les vins sont produits sur le domaine — sans intermédiaire.
+  </p>
+  <p class="footer-note" data-lang="en">
+    Rue du Grand Arbre 23 · 1470 Bousval · Belgium<br>
+    All our wines are produced using organic and biodynamic farming.<br>
+    Wines produced and bottled on the estate.
+  </p>
+  <div class="footer-cert">
+    <span class="inline-fr">Bio · Biodyvin depuis 2024 · Brabant Wallon</span>
+    <span class="inline-en">Organic · Biodyvin since 2024 · Brabant Wallon</span>
+  </div>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.classList.toggle('en', lang === 'en');
+  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (i === 0 && lang === 'fr') || (i === 1 && lang === 'en'));
+  });
+  document.documentElement.lang = lang;
+}
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const pills = document.querySelectorAll('.nav-pill');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      pills.forEach(p => p.classList.remove('active'));
+      const active = document.querySelector(`.nav-pill[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
